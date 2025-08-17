@@ -136,16 +136,42 @@
         }
         @media (max-width: 600px) {
             nav {
+                display: block;
+                position: relative; /* Remove sticky on mobile */
+                padding: 0;
+                margin: 10px 0;
+            }
+            .nav-toggle {
+                display: block;
+                background: #333;
+                color: #F4F4F4;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                font-size: 18px;
+                border-radius: 5px;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background: #1A1A1A;
+                border-radius: 5px;
+                margin-top: 5px;
+            }
+            .nav-menu.active {
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+            }
+            nav a {
+                margin: 0;
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #555;
+            }
+            nav a:last-child {
+                border-bottom: none;
             }
             .cover h1 {
                 font-size: 28px;
-            }
-            nav a {
-                font-size: 14px;
-                margin: 0 50px;
             }
             .container {
                 padding: 15px;
@@ -158,94 +184,92 @@
                 color: #CCC;
             }
         }
-		/* Testimonial Grid */
-		.testimonial-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			gap: 20px;
-			margin-top: 20px;
-		}
-		.testimonial-item {
-			background: #333;
-			border-radius: 5px;
-			overflow: hidden;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-			text-align: center;
-			cursor: pointer;
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
-		.testimonial-item img {
-			width: 100%;
-			height: auto;
-			display: block;
-			max-height: 250px;
-			object-fit: cover;
-			transition: transform 0.3s ease;
-		}
-		.testimonial-item:hover {
-			transform: scale(1.05);
-			box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-		}
-		.testimonial-item:hover img {
-			transform: scale(1.1);
-		}
-		.testimonial-caption {
-			padding: 10px;
-			font-size: 14px;
-			color: #F4F4F4;
-			background: #2A2A2A;
-			margin: 0;
-		}
-
-		/* Modal Styles */
-		.modal {
-			display: none;
-			position: fixed;
-			z-index: 1000;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.9);
-			overflow: auto;
-			opacity: 0;
-			transition: opacity 0.3s ease;
-		}
-		.modal.active {
-			opacity: 1;
-		}
-		.modal-content {
-			margin: auto;
-			display: block;
-			max-width: 90%;
-			max-height: 80vh;
-			margin-top: 5vh;
-			border-radius: 5px;
-		}
-		.modal-close {
-			position: absolute;
-			top: 15px;
-			right: 35px;
-			color: #F4F4F4;
-			font-size: 40px;
-			font-weight: bold;
-			cursor: pointer;
-		}
-		.modal-close:hover {
-			color: #CCC;
-		}
-		#modalCaption {
-			color: #F4F4F4;
-			text-align: center;
-			margin: 20px 0;
-			font-size: 16px;
-		}
+        /* Testimonial Grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .testimonial-item {
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .testimonial-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .testimonial-item:hover img {
+            transform: scale(1.1);
+        }
+        .testimonial-caption {
+            padding: 10px;
+            font-size: 14px;
+            color: #F4F4F4;
+            background: #2A2A2A;
+            margin: 0;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            margin-top: 5vh;
+            border-radius: 5px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #F4F4F4;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: #CCC;
+        }
+        #modalCaption {
+            color: #F4F4F4;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <button onclick="window.print()" style="background-color: #666666; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-bottom: 20px;">Save as PDF</button>
-
         <!-- Cover Page -->
         <div class="cover">
             <a href="https://fitweebs.com" target="_blank" rel="noopener noreferrer"><img src="fitweebslogotransparentwhite.png" alt="Fitweebs Logo"></a>
@@ -253,25 +277,31 @@
             <p>Your Complete Blueprint to Maximizing Your Attractiveness and Health</p>
             <p>By Tyler B. (@tylerbtopg)</p>
         </div>
-
         <!-- Navigation -->
-        <nav>        
-            <a href="#intro">Introduction</a>
-			<a href="#intro-part2">Introduction part 2</a>
-			<a href="#personal-essentials">Personal Essentials for Looksmaxxing</a>
-            <a href="#facial">Facial Aesthetics</a>
-            <a href="#physique">Physique Enhancement</a>
-            <a href="#hair">Hair Care</a>
-            <a href="#hormones">Hormone Optimization</a>
-            <a href="#nutrition">Nutrition for Glow Up</a>
-            <a href="#lifestyle">Lifestyle Factors</a>
-            <a href="#actionplan">Action Plan</a>
-            <a href="#tracker">Progress Tracker</a>
-            <a href="#cta">Next Steps</a>
-
-    </ul>
-</nav>
+        <nav>
+            <div class="nav-toggle" onclick="toggleNav()">☰ Menu</div>
+            <div class="nav-menu">
+                <a href="#intro">Introduction</a>
+                <a href="#intro-part2">Introduction part 2</a>
+                <a href="#personal-essentials">Personal Essentials for Looksmaxxing</a>
+                <a href="#facial">Facial Aesthetics</a>
+                <a href="#physique">Physique Enhancement</a>
+                <a href="#hair">Hair Care</a>
+                <a href="#hormones">Hormone Optimization</a>
+                <a href="#nutrition">Nutrition for Glow Up</a>
+                <a href="#lifestyle">Lifestyle Factors</a>
+                <a href="#actionplan">Action Plan</a>
+                <a href="#tracker">Progress Tracker</a>
+                <a href="#cta">Next Steps</a>
+            </div>
         </nav>
+    </div>
+    <script>
+        function toggleNav() {
+            var menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 
 			 <!-- Introduction -->
 		<div id="intro" class="section active">
@@ -303,49 +333,17 @@
 <!-- Intro Part 2 -->
 <div id="intro-part2" class="section">
 <h2 onclick="toggleSection('intro-part2')">Intro Part 2: Why Men Get Mogged—And How to Fix It</h2>
-<p>Building on the foundation from our introduction, let's dive deeper into the reasons why so many young guys—and men overall—end up getting brutally mogged in the looks game. For the uninitiated, "mogged" means being completely outclassed in attractiveness: that moment when another dude strides in, looking chiseled, confident, and on point, while you're stuck blending into the wallpaper. The cold truth? It's usually your own doing, thanks to simple habits you've overlooked that scream "low effort." But here's the real talk—this isn't about chasing validation from others; it's about leveling up to your absolute best version through looksmaxxing. By spotting these traps early, you'll boost your health, skyrocket your confidence, and unleash that inner glow, opening up endless options in life, from dating to social dominance. You'll project unbreakable self-respect and top-tier value, pulling in the opportunities you crave because you've locked in on self-improvement. These flaws are 100% fixable, and crushing them fits perfectly into your looksmaxxing blueprint. Let's break down the biggest pitfalls in a clear, step-by-step way, showing how fixing them catapults you to god-tier potential. We'll tie it all into the upcoming sections like facial aesthetics, physique enhancement, nutrition, and lifestyle factors for a complete glow-up guide.</p>
+<p>Building on our intro, let's dive deeper into why so many young men (and men in general) get absolutely mogged in the attractiveness game. "Mogged" means getting outshined—when another guy walks in looking sharp, confident, and put-together, while you're fading into the background. The harsh truth? It's often self-inflicted through overlooked habits that scream neglect. We'll break this down through a woman's lens because, let's face it, understanding her perspective is key to persuasion: Women are wired to seek partners who signal health, vitality, and self-respect—evolutionary cues for a strong provider and mate. When you slack on these basics, you're broadcasting "low value," turning her off subconsciously before you even speak. But here's the good news: These are fixable. Adopt better habits, and you'll start mogging the competition. Let's unpack the common pitfalls and why they kill your appeal.</p>
 <h3>Bad Eating Habits: Acne, Bloating, and That Unhealthy Vibe</h3>
-<p>Picture this: You're grinding toward your looksmaxxing goals, but junk food sabotage is holding you back—pimples popping up like landmines, constant bloating making you feel soft, and that endless fatigue killing your vibe. A trash diet packed with sugary snacks, fast food, and processed junk sparks inflammation, leading to stubborn acne, swollen faces, and gut issues that leave you looking and feeling drained. This screams poor self-discipline, capping your glow-up potential and making you fade in comparisons. It also tanks your body composition—no definition, soft arms, or that unwanted gut—signaling you're not committed to the maxxing life. Flip the script: A ripped, lean physique amps up testosterone, builds mental toughness, and gives you that edge in every mirror check.</p>
-<h4>Quick Fixes and Tips:</h4>
-<ul>
-<li><strong>Swap to Whole Foods:</strong> Ditch the junk for nutrient-dense options like lean proteins, veggies, fruits, and healthy fats. This clears up skin and leans you out fast—check the <em>Nutrition for Glow Up</em> section for meal ideas and recipes.</li>
-<li><strong>Track Your Intake:</strong> Use an app to log meals; aim for high protein (1g per lb of body weight) to build muscle and burn fat.</li>
-<li><strong>Hydrate Smart:</strong> Drink 3-4 liters of water daily to reduce bloating and improve skin clarity—add electrolytes if you're active.</li>
-<li><strong>Pro Tip:</strong> Start with one change, like cutting sugar for a week, and watch your energy and skin transform.</li>
-</ul>
-<p>Result: You'll glow with vitality, unlocking social wins and confidence boosts every young looksmaxxer dreams of.</p>
+<p>From a woman's view: Imagine spotting a guy with potential, but his face is dotted with acne, his belly looks bloated, and he seems gassy or uncomfortable—it's an instant red flag. Poor diet (junk food, excessive sugar, processed crap) causes inflammation leading to breakouts, puffiness, and digestive issues that make you look (and feel) sluggish. It signals you don't care about your body, implying laziness or lack of self-control. Why would she invest in someone who can't even fuel himself right? Unhealthy eating also leads to an unfit body—no gym, flabby arms, or a dad bod without the dad status—making you look like you don't prioritize yourself. Women notice: A toned physique screams discipline and vitality, boosting testosterone and confidence. Fix it: Swap for whole foods (see nutrition section)—clear skin and a lean frame will make her think, "He takes care of himself; he'd take care of me too."</p>
 <h3>Poor Hygiene: Smelling Bad, Dirty Ears, and the "Gross Factor"</h3>
-<p>In the fast-paced world of looksmaxxing, nothing tanks your ascent faster than sloppy hygiene—BO hitting like a brick, ear gunk on display, or breath that clears the room, leaving you sidelined and doubting your game. Skipping showers, forgetting deodorant, or slacking on brushing/flossing breeds odors and grime that shout "neglect," blocking your path to confident interactions and that next-level appeal. Tiny oversights like unclean ears or neglected grooming zones suggest deeper laziness, creating hurdles in close-up situations where details matter most. Mastering hygiene shows elite self-respect, setting the stage for magnetic presence.</p>
-<h4>Quick Fixes and Tips:</h4>
-<ul>
-<li><strong>Daily Routine Lock-In:</strong> Shower twice a day (morning and night) with a mild soap to stay fresh without drying skin.</li>
-<li><strong>Deodorant Upgrade:</strong> Go aluminum-free for health benefits; apply after showers and re-up midday if needed.</li>
-<li><strong>Ear and Oral Care:</strong> Use Q-tips gently post-shower for ears; brush twice, floss once, and use mouthwash daily to kill bad breath.</li>
-<li><strong>Pro Tip:</strong> Groom intimate areas regularly to avoid buildup—it's a game-changer for confidence in close encounters. Link this to <em>Facial Aesthetics</em> for overall skin health.</li>
-</ul>
-<p>Result: You'll feel fresh AF, turning potential cringes into smooth, confident moves.</p>
+<p>Through her eyes: Nothing kills attraction faster than a whiff of BO or seeing earwax buildup—it's disgusting and implies overall neglect. Not showering daily, skipping deodorant, or ignoring basics like brushing/flossing leads to bad breath, body odor, and visible dirt that screams "unhygienic." Dirty ears? That's a detail she spots up close, hinting at laziness in hidden areas—think unwashed groin leading to "cheese dick" (smegma buildup). What girl wants to kiss someone with foul breath or go down on a guy who might be gross down there? It's a massive turn-off, associating you with discomfort or health risks. Persuasion: Cleanliness signals respect—for yourself and her. Daily showers, deodorant (aluminum-free for health), and Q-tips for ears will make you smell fresh and approachable, turning "ew" into "mmm."</p>
 <h3>Chapped Lips and Scruffy Facial Hair: Looking Neglected</h3>
-<p>Chapped lips cracking like desert ground or patchy, wild facial hair can make you look straight-up unkempt, throwing shade on your looksmaxxing efforts and dimming that sharp, youthful edge. Dry lips scream dehydration and carelessness, looking immature in selfies or convos, while uneven scruff (if your beard game's weak) hides your jawline potential, spotlighting flaws instead of framing your face like a pro. This kind of neglect keeps you from hitting peak presentation, limiting the halo effect that comes with polished looks. Smooth, hydrated features crank up symmetry and invite that irresistible vibe.</p>
-<h4>Quick Fixes and Tips:</h4>
-<ul>
-<li><strong>Lip Hydration Hack:</strong> Carry red-tinted Vaseline or ChapStick everywhere; apply multiple times a day for plump, kissable lips—see <em>Personal Essentials for Looksmaxxing</em>.</li>
-<li><strong>Facial Hair Strategy:</strong> If beard growth is patchy, shave clean with a single-blade razor to avoid irritation and reveal jawline.</li>
-<li><strong>Trim for Winners:</strong> For those who can grow it, use clippers to trim evenly and line up edges for a sharp, masculine look—ties into <em>Hair Care</em> section.</li>
-<li><strong>Pro Tip:</strong> Exfoliate lips weekly with a soft toothbrush for smoothness; drink more water to prevent chapping from the inside.</li>
-</ul>
-<p>Result: You'll step up as the detail-obsessed maxxer, glowing with self-discipline.</p>
+<p>Her perspective: Chapped, dry lips look painful and unkempt—why would she want to kiss that? It feels rough, signals dehydration or poor care, and makes you seem immature or oblivious. Similarly, scruffy, patchy facial hair (if you can't grow a full beard) looks lazy and uneven, mogging your jawline and aging you poorly. If stubble isn't uniform, it highlights flaws rather than enhancing masculinity. Reasoning: Women crave smooth, inviting features—soft lips invite intimacy, a clean shave (or lined beard) sharpens your face, boosting symmetry and appeal. Fix: Carry red-tinted Vaseline or ChapStick for hydrated, subtly enhanced lips (see personal essentials). Shave clean with a single-blade razor if beardless, or trim/line for definition— she'll see a man who details matter to.</p>
 <h3>Bad Posture and Weak Voice: Signaling Low Confidence</h3>
-<p>A slouched stance or mumbly voice can make you seem shrunk and unsure, like you're dodging the spotlight in a world where looksmaxxing demands you own the room. Hunching chops inches off your height and projects weakness, while quiet muttering signals beta energy, fading you out in group chats or approaches. These desk-job habits or gym skips fuel a confidence drain, restricting your social and aesthetic gains. But straight posture and a booming voice scream alpha command, making you taller, bolder, and unignorable.</p>
-<h4>Quick Fixes and Tips:</h4>
-<ul>
-<li><strong>Posture Drills:</strong> Stand tall with shoulders back; do Huberman's walks (quick searches online for tutorials) daily to build the habit.</li>
-<li><strong>Voice Training:</strong> Practice speaking from your diaphragm—record yourself and aim for clear, projected tone in convos.</li>
-<li><strong>Gym Integration:</strong> Strengthen your core and back with exercises like deadlifts and rows—link to <em>Physique Enhancement</em> for routines.</li>
-<li><strong>Pro Tip:</strong> Set phone reminders to check posture every hour; combine with breathing exercises for instant confidence boosts.</li>
-</ul>
-<p>Result: It'll amp your frame and unlock the dominant aura young maxxers use to dominate scenes.</p>
+<p>From her angle: A hunched back makes you look shorter, weaker, and insecure—like you're hiding from the world. Afraid to project your voice? It comes off mumbly or timid, a huge turn-off as it signals non-confidence and submissiveness. Women are drawn to leaders; slouching and whispering scream "beta," making her feel unprotected or uninterested. Plus, poor posture from desk life or no gym worsens this, giving a frail, uncared-for body vibe. Persuasion: Upright posture and a strong voice project dominance and self-assurance—evolutionary magnets. Practice standing tall (Huberman's walks help) and speaking clearly; it'll make you appear taller, more commanding, and irresistible.</p>
 <h3>Overall: The Ripple Effect of Neglect</h3>
-<p>These slip-ups stack up hard: Crappy habits leave you looking rough, feeling repellant, and acting small, mogging you right out of the wins you deserve. But reverse engineer it—hit the gym for that beast mode body, lock in hygiene for crisp vibes, and nail confidence signals for poise—and you'll beam high-value energy. This intro sets the stage for your looksmaxxing journey, turning you into the vibrant, self-mastered guy who naturally pulls top-tier options, from hookups to hype. It's your call to action—start today, crush these basics, and watch your glow-up explode. Head to the next sections like Personal Essentials and Facial Aesthetics for the tools to build your unbreakable blueprint.</p>
+<p>These issues compound: Bad habits make you look unhealthy, smell off-putting, and act insecure—mogging you out of opportunities. Through a woman's lens, it's simple: You signal low effort, which translates to low value in relationships. But flip it—prioritize gym for a cared-for body, hygiene for freshness, and confidence cues—and you'll radiate high status. Women notice the guy who glows with self-respect; be that man. This is your wake-up call—implement now, and watch your attractiveness skyrocket. Dive into the sections ahead for actionable fixes.</p>
 </div>
 
 
